@@ -85,6 +85,15 @@ class Game {
     }
 
     this.snake.move();
+
+    const head = this.snake.getHead();
+    const food = this.food.getPosition();
+
+    if (head.x === food.x && head.y === food.y) {
+      this.food.respawn();
+    } else {
+      this.snake.removeTail();
+    }
   }
 
   startGameLoop() {
