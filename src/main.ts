@@ -10,6 +10,7 @@ class Game {
   snake = new Snake();
   food = new Food();
   isPlaying = false;
+  score = 0;
 
   constructor() {
     this.canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
@@ -72,6 +73,14 @@ class Game {
     this.snake.draw(this.ctx, CELL_SIZE);
 
     this.food.draw(this.ctx, CELL_SIZE);
+
+    // score
+    this.ctx.strokeStyle = "black";
+    this.ctx.lineWidth = 3;
+    this.ctx.strokeText(`Score: ${this.score}`, 20, 40);
+    this.ctx.font = "20px 'Press Start 2P'";
+    this.ctx.fillStyle = "white";
+    this.ctx.fillText(`Score: ${this.score}`, 20, 40);
   }
 
   update() {
@@ -90,6 +99,7 @@ class Game {
     const food = this.food.getPosition();
 
     if (head.x === food.x && head.y === food.y) {
+      this.score++;
       this.food.respawn();
     } else {
       this.snake.removeTail();
